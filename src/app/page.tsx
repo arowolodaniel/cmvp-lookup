@@ -50,7 +50,8 @@ export default function Home() {
 
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      handleSearch(new Event('submit') as any, newPage);
+      const fakeEvent = { preventDefault: () => {} } as React.FormEvent;
+      handleSearch(fakeEvent, newPage);
     }
   };
 
@@ -63,29 +64,6 @@ export default function Home() {
       return `${firstName} ${otherName} ${lastName}`.trim();
     }
     return `${firstName} ${lastName}`.trim();
-  };
-
-  const getCategoryColor = (category: string) => {
-    if (!category) return 'bg-gray-100 text-gray-800 border-gray-200';
-    
-    switch (category.toLowerCase()) {
-      case 'professional':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'student':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'corporate':
-        return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'associate':
-        return 'bg-orange-100 text-orange-800 border-orange-200';
-      case 'fellow':
-        return 'bg-red-100 text-red-800 border-red-200';
-      case 'unassigned':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-      case 'affiliate':
-        return 'bg-indigo-100 text-indigo-800 border-indigo-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
   };
 
   const getStatusColor = (status: string) => {
@@ -181,7 +159,7 @@ export default function Home() {
                   {/* Search Results Count */}
                   <div className="text-center mb-6">
                     <p className="text-lg text-gray-600">
-                      Found {totalCount} member{totalCount !== 1 ? 's' : ''}
+                      Found {totalCount} member{totalCount !== 1 ? `s` : ``}
                     </p>
                   </div>
                   
@@ -349,7 +327,7 @@ export default function Home() {
                     The Cyber Security Experts Association of Nigeria (CSEAN) is a professional body 
                     dedicated to promoting cybersecurity awareness, education, and best practices across Nigeria. 
                     Our members include cybersecurity professionals, researchers, educators, and organizations 
-                    committed to securing Nigeria's digital infrastructure.
+                    committed to securing Nigeria&apos;s digital infrastructure.
                   </p>
                 </div>
               </div>
